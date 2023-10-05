@@ -1,0 +1,140 @@
+{%load static%}
+
+<link rel="stylesheet" href="{%static 'css/header.css'%}">
+
+
+<header class="trans sticky-top">
+    <!-- Jumbotron -->
+    <div class="p-3 text-center border-bottom">
+        <div class="container">
+            <div class="row gy-3" style="
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        ">
+                <!-- Left elements -->
+                <div class="col-lg-2 col-sm-4 col-4">
+                    <a href="/" class="float-start">
+                        <img class=" logo" src="../static/img/VZR_logo.png" height="35" style="height: 40px;" />
+                    </a>
+                </div>
+                <!-- Left elements -->
+
+                <!-- Center elements -->
+                <div class="order-lg-last col-lg-5 col-sm-8 col-8"
+                    style="display: flex; align-items: center; justify-content: center;">
+                    <div class="d-flex float-end">
+                        {% if user.is_authenticated %}
+                        <div class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-mdb-toggle="dropdown" aria-expanded="false">
+                                Welcome, {{request.user.first_name}}
+                            </a><ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin-top: 5px !important">
+                                <li><a class="dropdown-item" href="/signout" style="color: black !important;">Sign Out</a></li>
+                            </ul>
+                        </div>
+                        
+                        {% else %}
+                        <a href="/signin" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                            <i class="fas fa-user-alt m-1 me-md-2"></i>
+                            <p class="d-none d-md-block mb-0">Sign in</p>
+                        </a>
+
+                        {% endif %}
+                        <div style="display: none !important;">
+                            <a href="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center">
+
+                                <i class="fas fa-shopping-cart m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">My cart <span style="padding: .7rem;"> </span><span
+                                        class="badge rounded-pill badge-notification bg-danger"
+                                        style="font-size: 1rem !important; margin: 2px -15px;"><span
+                                            id="cart">0</span></span></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Center elements -->
+
+                <!-- Right elements -->
+                <div class="col-lg-5 col-md-12 col-12">
+                    <div class="input-group float-center">
+                        <form action="/search/" method="get" class="d-flex input-group float-center">
+                            <div class="form-outline">
+                                <input type="search" id="search" name="search" class="form-control" />
+                                <label class="form-label" for="search">Search</label>
+                            </div>
+                            <button type="submit" class="btn rounded btn-primary shadow-0">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Right elements -->
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <!-- Container wrapper -->
+        <div class="container justify-content-center justify-content-md-between">
+            <!-- Toggle button -->
+            <button class="navbar-toggler border py-2 text-dark" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="text-shadow: 0 0 10px white; font-weight: 600;">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+                            data-mdb-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <!-- Dropdown menu -->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" style="color: black !important;" href="#">Laptops</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" style="color: black !important;" href="#">Pre-Built PCs</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Today's Deals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">RTX Graphics Card</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Intel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">AMD</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Accessories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/contact">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/trackerStatus">Track Order</a>
+                    </li>
+                </ul>
+                </li>
+                </ul>
+                <!-- Left links -->
+            </div>
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+</header>

@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Checkout - VZR {% endblock %}
+
+{% block main %}
+
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 mb-4">
+
+
+
+                <div class="card mb-4 border shadow-0">
+                    <div class="p-4 d-flex justify-content-between">
+                        <div class="">
+                            <h5>Have an account?</h5>
+                            <p class="mb-0 text-wrap ">You have to create a account or sign-in to continue.</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+                            <a href="#" class="btn btn-primary me-0 me-md-2 mb-2 mb-md-0 w-100">Register</a>
+                            <a href="#" class="btn btn-primary shadow-0 text-nowrap w-100">Sign in</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Checkout -->
+                <div class="card shadow-0 border">
+                    <div class="p-4">
+                        <h5 class="card-title mb-3">Details</h5>
+                        <form action="/checkout/" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" id="itemsJson" name="itemsJson">
+                            <input type="hidden" id="amount" name="amount">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Name <small class="text-danger" style="padding: 0 10px;"> *Required
+                                        </small></p>
+                                    <div class="form-outline">
+                                        <input type="text" id="name" required name="name" placeholder="Type here"
+                                            class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Phone <small class="text-danger" style="padding: 0 10px;"> *Required
+                                        </small></p>
+                                    <div class="form-outline">
+                                        <input type="tel" id="phone" required name="phone"
+                                            placeholder="Enter Phone Number" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Email <small class="text-danger" style="padding: 0 10px;"> *Required
+                                        </small></p>
+                                    <div class="form-outline">
+                                        <input type="email" id="email" required name="email"
+                                            placeholder="example@gmail.com" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4" />
+
+                            <h5 class="card-title mb-3">Shipping info</h5>
+
+                            <div class="row">
+                                <div class="col-sm-8 mb-3" style="width: 100% !important;">
+                                    <p class="mb-0">Address <small class="text-danger" style="padding: 0 10px;">
+                                            *Required
+                                        </small></p>
+                                    <div class="form-outline">
+                                        <input type="text" id="address" name="address" required placeholder="Type here"
+                                            class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-6 mb-3">
+                                    <p class="mb-0">Zipcode <small class="text-danger" style="padding: 0 10px;">
+                                            *Required
+                                        </small></p>
+                                    <div class="form-outline">
+                                        <input type="text" id="zip_code" required placeholder="Enter Zipcode"
+                                            name="zip_code" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 mb-3">
+                                    <p class="mb-0">City <small class="text-danger" style="padding: 0 10px;">
+                                            *Required
+                                        </small></p>
+                                    <div class="form-outline">
+                                        <input type="text" id="city" required placeholder="Enter City" name="city"
+                                            class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <p class="mb-0">State <small class="text-danger" style="padding: 0 10px;">
+                                            *Required
+                                        </small></p>
+                                    <div class="form-outline">
+                                        <input type="text" id="state" required placeholder="Enter State" name="state"
+                                            class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <p class="mb-0">Message to seller (Optional)</p>
+                                <div class="form-outline">
+                                    <textarea class="form-control" name="mssg" placeholder="Optional" id="mssg"
+                                        rows="2"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="float-end">
+                                <input type="submit" class="btn btn-success shadow-0 border"></input>
+                            </div>
+                        </form>
+                        <button onclick="CartClear()" class="btn btn-light border"
+                            style="color: white !important;">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Checkout -->
+            </div>
+            <div class="col-xl-4 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+                <div class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px;">
+                    <h6 class="mb-3">Summary</h6>
+                    <div class="d-flex justify-content-between" id="item-price">
+                        <p class="mb-2">Total price:</p>
+
+                    </div>
+                    <div class="d-flex justify-content-between" id="dis-cost">
+                        <p class="mb-2">Discount:</p>
+
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">Shipping cost:</p>
+                        <p class="mb-2" id="del-cost">+ ₹ 100.00</p>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between" id="totalprice">
+                        <p class="mb-2" id="final_price">Total price:</p>
+
+                    </div>
+                    <div>
+                        {% if coupon_error %}
+                        <div class="alert alert-info">
+                            {{coupon_error}}
+                        </div>
+                        {% endif %}
+                        <form method="get" action="">
+                            <div class="input-group mt-3 mb-4">
+                                <input type="text" id="promocode" class="form-control border" name="promocode"
+                                    placeholder="Promo code" />
+                                <button type="submit" class="btn btn-light border"
+                                    style="color: white !important;">Apply</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <hr />
+                    <h6 class="text-dark my-4">Product</h6>
+
+                    <div class="d-flex align-items-center mb-4">
+                        <div id="items">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block js %}
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+<script>
+
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
+    console.log(cart);
+
+    var TIBG10 = 0.1;
+
+    for (item in cart) {
+        let name = cart[item][0];
+        let price = cart[item][2];
+
+        mystr = `<li href="#" class="nav-link text-black">
+                                ${name}
+                            </li>
+                            <div class="price text-muted">${price}</div>`
+
+        $('#items').append(mystr);
+
+        myprice = `<p class="mb-2">${price}</p>`
+
+        $('#item-price').append(myprice);
+
+
+        a = price.slice(1);
+        a = a - (a * TIBG10);
+        c = parseInt(a)
+        b = parseInt(a) + 100;
+
+        var afterTIBG10 = parseInt(a * TIBG10);
+
+        discount = `<p class="mb-2 text-danger" >- ₹ ${afterTIBG10}</p>`
+
+        $('#dis-cost').append(discount);
+
+        totalprice = `<p class="mb-2 fw-bold" id='total_amount'>₹ ${b}</p>`
+
+        $('#totalprice').append(totalprice);
+
+    }
+    $('#itemsJson').val(JSON.stringify(cart));
+    {% if thank %}
+    alert('Thankyou for Ordering. Your Order ID is {{id}}. Use it to track your order using our Order Tracker');
+    localStorage.clear();
+    document.location = "/";
+    {% endif %}
+
+    const CartClear = () => {
+        localStorage.clear();
+        document.location = "/";
+    }
+    $('#amount').val($('#total_amount').html().slice(1))
+</script>
+
+{% endblock %}

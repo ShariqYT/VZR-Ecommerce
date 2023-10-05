@@ -1,0 +1,45 @@
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-items {
+    align-items: center;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.justify-btw {
+    justify-content: space-between;
+}
+
+.grid {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.grid-row {
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.grid-col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.txt-color {
+    color: red;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+
+.grid{
+    display: grid;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+
+<head>
+    <meta charset="utf-8">
+    <title>Pricing Plan With Details - VZR.in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{%static 'css/subscription.css'%}">
+
+</head>
+{%include 'header.html'%}
+
+<body>
+    <div id="pricing">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="subs-head">Subscription Plan</h1>
+                <p class="subs-para">Subscription pricing is a pricing model that allows customers to subscribe to
+                    services or purchase
+                    products for a specific amount of time on a recurring basis at a set price point</p>
+            </div>
+            <div class="row text-center">
+                <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp">
+                    <div class="single-pricing">
+                        <div class="price-head">
+                            <h2>Starter</h2>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <h1 class="price">₹499</h1>
+                        <h5>Monthly</h5>
+                        <ul>
+                            <li>2 Times PC Service</li>
+                            <li>Delivery Charges</li>
+                            <li>5% Off On Products</li>
+                        </ul>
+                        <a href="{%url 'checkout'%}">Get start</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4" data-wow-duration="1s" data-wow-delay="0.2s"
+                    data-wow-offset="0">
+                    <div class="single-pricing">
+                        <div class="price-head">
+                            <h2>popular</h2>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="price-label">Recommend</span>
+                        <h1 class="price">₹1999</h1>
+                        <h5>Monthly</h5>
+                        <ul>
+                            <li>5 Times PC Service</li>
+                            <li>50% Delivery Charges</li>
+                            <li>10% Off On Products</li>
+                            <li>Customer Care Support</li>
+                        </ul>
+                        <a href="{%url 'checkout'%}">Get start</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-white">
+                    <div class="single-pricing single-pricing-white">
+                        <div class="price-head">
+                            <h2>Advance</h2>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="price-label">Popular</span>
+                        <h1 class="price">₹5999</h1>
+                        <h5>Monthly</h5>
+                        <ul>
+                            <li>10 Times PC Service</li>
+                            <li>Free Delivery</li>
+                            <li>20% Off On Products</li>
+                            <li>Customer Care Support</li>
+                            <li>Unlimited Support</li>
+                        </ul>
+                        <a href="{%url 'checkout'%}">Get start</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{%static 'js/script.js'%}"></script>
+    {%include 'footer.html'%}
+</body>
+
+</html>

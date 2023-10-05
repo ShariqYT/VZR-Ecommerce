@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block title %} Search Results - VZR {% endblock %}
+
+{% block main %}
+<!-- Jumbotron -->
+<section>
+    <div class="container my-5">
+        <div class="row">
+            {% for j in topDeal %}
+            <div class="col-lg-3 col-md-6 col-sm-6 d-flex">
+                <div class="card = align-items-center w-100 my-2 shadow-2-strong">
+                    
+                        <img src="/media/{{j.deals_image}}" class="zoom-effect-img card-img-top"
+                            style="aspect-ratio: 1 / 1; padding: 20px;" />
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title" id="nametd{{j.id}}">{{j.deals_name | slice:"0:"}}..</h5>
+                            <p class="card-text" id="pricetd{{j.id}}">₹ {{j.deals_price}}</p>
+                            <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+                                <a class="txt-black" href="topdeals-products/{{j.id}}">
+                                <button id="td{{j.id}}" class="btn cart btn-primary shadow-0 me-1"
+                                    style="background-color: var(--secondary-color) !important;">Buy Now</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+</section>
+<!-- Products -->
+<div class="container">
+    {% for product, range, nSlides in allProds %}
+    <header class="mb-4" style="margin: 70px 0px;">
+        <h2>{{product.0.category}}</h2>
+    </header>
+    <div class="row">
+        <div id="carouselExampleControls{{forloop.counter}}" class="carousel slide" data-mdb-ride="carousel">
+            <div class="carousel-indicators" style="bottom: -10%;">
+                <li style="background-color: var(--secondary-color) !important; margin: -15px 0px;"
+                    data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></li>
+                {% for i in range %}
+                <li style="background-color: var(--secondary-color) !important; margin: -15px 0px;"
+                    data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="{{i}}" aria-current="true"
+                    aria-label="Slide 2"></li>
+                {% endfor %}
+            </div>
+            <div class="container carousel-inner">
+                <div class="carousel-item active">
+                    {% for i in product %}
+                    <div class="col-sm-3 col-xs-3 col-md-3">
+                        <div class="card align-items-center card-slide">
+                            
+                                <img src='/media/{{i.product_image}}' class="card-img-top" alt="Fissure in Sandstone" />
+                                <div class="card-body">
+                                    <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name | slice:"0:23"}}..</h5>
+                                    <p class="card-text">{{i.product_desc | slice:"0:23"}}..</p>
+                                    <p class="card-text" id="pricepr{{i.id}}">₹ {{i.price}}</p>
+                                    <a class="txt-black" href="/products/{{i.id}}">
+                                    <button id="pr{{i.id}}" style="background-color: var(--secondary-color) !important;"
+                                        class="btn cart btn-primary">Buy Now</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+            </div>
+            <div class="carousel-item">
+                {% endif %}
+
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" style="width: 5% !important;" type="button"
+                data-mdb-target="#carouselExampleControls{{forloop.counter}}" data-mdb-slide="prev">
+                <span class="carousel-control-prev-icon"
+                    style="background-color: var(--secondary-color) !important; border-radius: 100px; height: 2.6rem !important;"
+                    aria-hidden="true"><span class="visually-hidden">Previous</span></span>
+
+            </button>
+            <button class="carousel-control-next" style="width: 5% !important;" type="button"
+                data-mdb-target="#carouselExampleControls{{forloop.counter}}" data-mdb-slide="next">
+                <span class="carousel-control-next-icon"
+                    style="background-color: var(--secondary-color) !important; border-radius: 100px; height: 2.6rem !important;"
+                    aria-hidden="true"><span class="visually-hidden">Next</span></span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+
+
+<script>
+
+{% if mssg|length != 0 %}
+alert('{{mssg}}');
+location.href = "/"
+{% endif %}
+    
+if (localStorage.getItem('cart') == null) {
+    var cart = {};
+} else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+}
+
+$('.cart').click(function () {
+    var idstr = this.id.toString();
+    if (cart[idstr] != undefined) {
+        qty = cart[idstr][0] +1;
+    } else {
+        qty = 1;
+        const name = document.getElementById('name' +idstr).innerHTML;
+        const price = document.getElementById('price' +idstr).innerHTML;
+        cart[idstr] = [name, qty, price];
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+});
+
+// function updateCart(cart) {
+//     var sum = 0;
+//     for (var item in cart) {
+//         sum = sum + cart[item];
+//         document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>--</button> <span id='val" + item + "' style='padding: 0 10px;font-size: 20px;'>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'>+</button>";
+//     }
+
+//     localStorage.setItem('cart', JSON.stringify(cart));
+//     document.getElementById('cart').innerHTML = sum;
+// }
+
+// function updateCartPage(cart) {
+//     var upStr = "";
+//     // upStr = upStr + ""
+//     for (var item in cart) {
+//         upStr = upStr + document.getElementById('name' + item).innerHTML;
+//     }
+//     console.log(upStr)
+// }
+
+// $('.divpr').on("click", "button.minus", function () {
+//     a = this.id.slice(7,);
+//     cart['pr' + a] = cart['pr' + a] - 1;
+//     cart['pr' + a] = Math.max(0, cart['pr' + a]);
+//     document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+//     updateCart(cart);
+// })
+// $('.divpr').on("click", "button.plus", function () {
+//     a = this.id.slice(6,);
+//     cart['pr' + a] = cart['pr' + a] + 1;
+//     document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+//     updateCart(cart);
+// })
+
+
+
+
+// $('.divtd').on("click", "button.minus", function () {
+//     b = this.id.slice(7,);
+//     cart['td' + b] = cart['td' + b] - 1;
+//     cart['td' + b] = Math.max(0, cart['td' + b]);
+//     document.getElementById('valtd' + b).innerHTML = cart['td' + b];
+//     updateCart(cart);
+// })
+// $('.divtd').on("click", "button.plus", function () {
+//     b = this.id.slice(6,);
+//     cart['td' + b] = cart['td' + b] + 1;
+//     document.getElementById('valtd' + b).innerHTML = cart['td' + b];
+//     updateCart(cart);
+// })
+
+</script>
+
+
+{% endblock %}
+
+{% include 'footer.html' %}

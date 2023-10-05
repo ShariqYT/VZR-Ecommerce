@@ -1,0 +1,72 @@
+:root{
+    --primary-color: rgba(255, 255, 255, 0.1) !important;
+    --secondary-color: rgb(255, 115, 0) !important;
+    --text-color: white !important;
+}
+
+
+
+/* Footer  */
+
+
+footer {
+    background-color: black;
+    color: white;
+    height: 15vh;
+    padding: 0px 15vw;
+    justify-content: space-between;
+
+}
+
+.footer_logo img {
+    height: 4rem;
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(192deg) brightness(102%) contrast(104%);
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+}
+
+.footer_logo img:hover {
+    transform: scale(110%);
+}
+
+footer p {
+    font-size: 1rem;
+}
+
+footer .icons {
+    margin: 0px 60px;
+    font-size: 2rem;
+}
+
+footer i {
+    padding: 10px;
+}
+
+.fa-linkedin,
+.fa-github,
+.fa-instagram,
+.fa-discord {
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.fa-linkedin:hover {
+    color: rgb(72, 115, 255);
+    transform: scale(1.2);
+}
+
+.fa-github:hover {
+    color: orange;
+    transform: scale(1.2);
+}
+
+.fa-instagram:hover {
+    color: #E1306C;
+    transform: scale(1.2);
+}
+
+.fa-discord:hover {
+    color: rgb(153, 0, 255);
+    transform: scale(1.2);
+}

@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    transition: all .2s ease-in-out !important;
+}
+
+:root{
+    --primary-color: rgba(255, 255, 255, 0.1) !important;
+    --secondary-color: rgb(255, 115, 0) !important;
+    --text-color: white !important;
+}
+
+.rounded{
+    background-color: var(--secondary-color) !important;
+    color: var(--text-color) !important;
+}
+
+.logo:hover {
+    transform: scale(120%) !important;
+}
+
+.nav-item{
+    margin: 0 10px !important;
+}
+
+.nav-item a:hover{
+    transform: scale(110%) !important;
+}

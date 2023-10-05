@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Contact Us - VZR {% endblock %}
+
+
+{% block main %}
+
+<div class="container my-5" style="max-width: 30%;">
+    <h2 class="my-5">Contact Us For Any Queries</h2>
+    <form action="/contact/" method="post">
+        {% csrf_token %}
+        <!-- Name input -->
+        <div class="form-outline mb-4">
+          <input required type="text" id="name" name="name" class="form-control" />
+          <label class="form-label" for="name">Name</label>
+        </div>
+      
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <input required type="email" id="email" name="email" class="form-control" />
+          <label class="form-label" for="email">Email address</label>
+        </div>
+
+        <!-- Phone input -->
+        <div class="form-outline mb-4">
+          <input required type="tel" id="phone" name="phone" class="form-control"/>
+          <label class="form-label" for="phone">Phone Number</label>
+        </div>
+      
+        <!-- Message input -->
+        <div class="form-outline mb-4">
+          <textarea required class="form-control" id="mssg" name="mssg" rows="4"></textarea>
+          <label class="form-label" for="mssg">Message</label>
+        </div>
+      
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+      </form>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+  {% if thank %}
+    alert('Please wait for our reply on your mail. Thankyou for Contacting Us.');
+  {% endif %}
+</script>
+
+{% endblock %}

@@ -1,0 +1,133 @@
+@media only screen and (max-width:1440px){
+    .nav2 .nav-list li{
+        font-size: 1rem;
+    }
+    .container .nav2 input {
+        width: 300px;
+    }
+    section {
+        height: 100%;
+    }
+    .grid-col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .signup {
+        margin-top: 200px;
+    }
+    .signup-box {
+        margin-right: 0px;
+    }
+    footer img {
+        height: 30px;
+    }
+    footer p {
+        margin-right: 20px;
+        font-size: 1rem;
+    }
+}
+@media only screen and (max-width:1024px){
+    section div img {
+        height: 400px;
+    }
+    .nav2 .nav-list li{
+        font-size: 0.8rem;
+    }
+    .container .nav2 input {
+        width: 200px;
+        height: 30px;
+    }
+    .container .nav2 .nav-icon .p1,
+    .container .nav2 .nav-icon .p2{
+        font-size: 1rem;
+    }
+    .container .nav2 {
+        padding: 0px 5px;
+    }
+    section p {
+        font-size: 1rem;
+    }
+    
+    section p img {
+        height: 30px;
+    }
+    .signup-text {
+        padding: 25px 20px;
+    }
+
+    .signup-box {
+        margin-top: 30px;
+    }
+    .signup-box .email {
+        width: 20rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+
+    footer {
+        padding: 0px 20px;
+    }
+    footer .icons{
+        font-size: 1.5rem;
+        flex-direction: row;
+        display: flex;
+    }
+    footer img{
+        height: 40px;
+        margin-left: 10px;
+    }
+}
+@media only screen and (max-width:768px){
+    .container .nav2 .nav-list li {
+        margin-left: 17px;
+    }
+    .container .nav2 .img-logo{
+        height: 3rem;
+    }
+    section div img {
+        height: 300px;
+    }
+    .nav2 .nav-list li{
+        font-size: 0.8rem;
+    }
+    .container .nav2 input {
+        width: 200px;
+        height: 30px;
+    }
+    .container .nav2 .nav-icon .p1,
+    .container .nav2 .nav-icon .p2{
+        font-size: 1rem;
+    }
+    .container .nav2 {
+        padding: 0px 5px;
+    }
+    section p img {
+        height: 20px;
+    }
+    section p {
+        font-size: 0.8rem;
+    }
+    
+
+    .signup-box .email {
+        width: 15rem;
+    }
+
+    footer img{
+        height: 20px;
+        margin-left: 0px;
+    }
+}
+@media only screen and (max-width:425px){
+    footer p,
+    footer .icons,
+    footer img,
+    .signup h2,
+    .signup p,
+    .signup input
+    {
+        display: none;
+    }
+    .grid{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
